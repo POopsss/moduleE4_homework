@@ -1,3 +1,4 @@
+// Написать функцию, которая создает пустой объект, но без прототипа.
 function getNullPrototype(){
   const obj = {}
   obj.__proto__ = null
