@@ -6,7 +6,7 @@ class HomeLine {
         this.deviceID = 1;
     }
 
-    // Добавление устройства в сеть
+    // Добавление/Удаление устройств из сет
     addDevice(device) {
         // Разделим устройства по типу (чтобы было)
         if (!this.devices.has(device.type)){
@@ -17,8 +17,6 @@ class HomeLine {
         device.id = this.deviceID;
         this.deviceID++;
     }
-
-    // Удаление устройства из сети
     rmDevice(device) {
         this.devices.get(device.type).delete(device.id);
     }
@@ -62,30 +60,30 @@ class Device {
 
 // Освещение
 class Lighting extends Device {
-    constructor(name, socet, power) {
+    constructor(name, socket, power) {
         let type = 'lightning';
         if (!power){
             power = 0;
         }
         super(name, power, type);
         this.lamp = {};
-        this.socet = socet;
-        this.free_socet = [];
-        for (let i= 0; i < this.socet; i++) {
-            this.free_socet.push(i);
+        this.socket = socket;
+        this.free_socket = [];
+        for (let i= 0; i < this.socket; i++) {
+            this.free_socket.push(i);
         }
     }
 
-    // Добавление/Удаление ламп из сокетов светильников, люстр...
+    // Добавление/Удаление ламп из сокетов светильников/люстр...
     addLamp (lamp) {
-        this.lamp[this.free_socet[0]] = lamp;
-        lamp.id = this.free_socet[0];
-        this.free_socet.shift();
+        this.lamp[this.free_socket[0]] = lamp;
+        lamp.id = this.free_socket[0];
+        this.free_socket.shift();
         this.power += lamp.power;
     }
     rmLamp (lamp) {
         delete this.lamp[lamp.id];
-        this.free_socet.push(lamp.id);
+        this.free_socket.push(lamp.id);
         lamp.id = '';
         this.power += - lamp.power;
     }
@@ -126,18 +124,18 @@ const home2 = new HomeLine('home2');
 const lamp1 = new Lighting('lamp1', 6);
 const lamp2 = new Lighting('lamp1', 2);
 const lamp3 = new Lighting('lamp3', 0, 5);
-const diod1 = new Lamp('diod1', 1.5);
-const diod2 = new Lamp('diod1', 1.5);
-const diod3 = new Lamp('diod1', 1.5);
-const filament1 = new Lamp('filament1', 20);
+const diode1 = new Lamp('diode', 1.5);
+const diode2 = new Lamp('diode', 1.5);
+const diode3 = new Lamp('diode', 1.5);
+const filament1 = new Lamp('filament', 20);
 const boiler1 = new WaterHeater('boiler1', 800, 2);
 const boiler2 = new WaterHeater('boiler2', 2000, 30);
 const monitor1 = new TV('monitor1', 25, 30);
 const monitor2 = new TV('monitor2', 13, 17);
 
-lamp1.addLamp(diod1);
-lamp1.addLamp(diod2);
-lamp1.addLamp(diod3);
+lamp1.addLamp(diode1);
+lamp1.addLamp(diode2);
+lamp1.addLamp(diode3);
 lamp2.addLamp(filament1);
 
 home1.addDevice(lamp1);
@@ -160,4 +158,4 @@ console.log(home2.getInfo().enabled_device);
 boiler2.turnOff();
 
 home1.rmDevice(lamp1);
-lamp1.rmLamp(diod2);
+lamp1.rmLamp(diode2);
