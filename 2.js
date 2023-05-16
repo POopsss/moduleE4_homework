@@ -15,14 +15,14 @@ const obj = {
   'key': 'value'
 }
 
-let str = '1'
-console.log(checkKey(obj, str))
+let str = '1';
+console.log(checkKey(obj, str));
 
-str = 2
-console.log(checkKey(obj, str))
+str = 2;
+console.log(checkKey(obj, str));
 
-str = '3'
-console.log(checkKey(obj, str))
+str = '3';
+console.log(checkKey(obj, str));
 
-str = 'key'
-console.log(checkKey(obj, str))
+str = 'key';
+console.log(checkKey(obj, str));

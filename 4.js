@@ -45,10 +45,10 @@ Device.prototype.turnOff = function (){
 
 function Lighting(name, socket, power) {
   this.name = name;
-  this.type = 'lighting'
+  this.type = 'lighting';
   if (!power){
     this.power = 0;
-  } else this.power = power
+  } else this.power = power;
   this.lamp = {};
   this.socket = socket;
   this.free_socket = [];
@@ -84,16 +84,16 @@ function WaterHeater(name, power, volume) {
   this.power = power;
   this.volume = volume;
 }
-WaterHeater.prototype = new Device()
+WaterHeater.prototype = new Device();
 
 
 function TV(name, power, diagonal) {
   this.name = name;
-  this.type = 'tv'
+  this.type = 'tv';
   this.power = power;
   this.diagonal = diagonal;
 }
-TV.prototype = new Device()
+TV.prototype = new Device();
 
 
 
@@ -138,4 +138,4 @@ boiler2.turnOff();
 home1.rmDevice(lamp1);
 lamp1.rmLamp(diode2);
 
-console.log(home1)
+console.log(home1);
